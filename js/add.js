@@ -1,13 +1,11 @@
 
 import { input, eve, dadd } from "./functions.js";
-import { pullData, deleteData } from "./DB.js";
+import { deleteData,pullData} from "./DB.js";
 
 eve();
 document.querySelector(".submit").addEventListener("click", input);
-let data;
 
-setTimeout(() => {
-  data = pullData();
+  let data = await pullData();
   data.forEach(function (elem, i) {
     dadd(elem, i);
   });
@@ -18,4 +16,3 @@ setTimeout(() => {
      }
     });
   });
-}, 1500);

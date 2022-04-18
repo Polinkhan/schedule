@@ -9,7 +9,6 @@ import {
   deleteDoc,
   doc,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
-export let data = [];
 
 const firebaseConfig = {
   apiKey: "AIzaSyBLAXBrRpNN3dLVpKNW86OOAp4zWVQa2bg",
@@ -26,16 +25,12 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore();
 const colRef = collection(db, "schedules");
 
-getDocs(colRef)
-  .then((snapshop) => {
-    snapshop.docs.forEach((elem) => {
-      data.push({ ...elem.data(), id: elem.id });
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-export let pullData = () => data;
+export let pullData = async () => {
+  let x = await getDocs(colRef);
+  let data = [];
+  x.forEach((elem) => data.push({ ...elem.data(), id: elem.id }));
+  return data;
+};
 
 export let pushData = (item) => {
   let id = document.querySelector("#status");

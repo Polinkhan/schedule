@@ -1,11 +1,11 @@
-import { pushData } from "./DB.js";
+import { pushData,pullData } from "./DB.js";
 
 let hrs, min, ms;
 let htmlElement = `<div class="row my-4 text-center"><div id="topic" class="my-auto textfield col-4 label1"></div><div id="text" class="textfield col-4 label2 "></div><div id="timeLeft" class="textfield col-4 label3"></div></div>`;
 
-let build = (index)=>{
+let build = (index) => {
   return `<div class="row my-4 text-center"><div class="col-1" ></div><div id="name" class="my-auto textfield col-6 label1"></div><button type ="submit" value = "${index}" class=" btn text-danger fw-bold textfield col-4 label3 bg-label del">Delete</button>`;
-}
+};
 
 let msToTime = (s) => {
   let ms = s % 1000;
@@ -18,7 +18,6 @@ let msToTime = (s) => {
   let days = (s - hrs) / 24;
   return `${days}D ${hrs}H ${mins}M ${secs + 1}S left`;
 };
-
 
 let getDate = (date) => {
   switch (date.substring(5, 7)) {
@@ -133,5 +132,13 @@ export let add = (item) => {
 export let dadd = (item, index) => {
   console.log(item);
   document.getElementById("deleteItems").innerHTML += build(index);
-  document.querySelectorAll("#name")[index].innerHTML = item._name +" ["+ item._date.substring(5,10)+"]";
+  document.querySelectorAll("#name")[index].innerHTML =
+    item._name + " [" + item._date.substring(5, 10) + "]";
 };
+
+// export let getData = async () => {
+//   let data = [];
+//   let x = await pullData();
+//   x.forEach((elem) => data.push({ ...elem.data(), id: elem.id }));
+//   return data;
+// };
