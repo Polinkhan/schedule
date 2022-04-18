@@ -61,6 +61,7 @@ body{
   outline: none;
   height: 35px;
   width: 180px;
+  text-align: center;
 }
 
 .btn{
