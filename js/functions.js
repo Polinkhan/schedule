@@ -1,4 +1,4 @@
-import { pushData,pullData } from "./DB.js";
+import { pushData } from "./DB.js";
 
 let hrs, min, ms;
 let htmlElement = `<div class="row my-4 text-center"><div id="topic" class="my-auto textfield col-4 label1"></div><div id="text" class="textfield col-4 label2 "></div><div id="timeLeft" class="textfield col-4 label3"></div></div>`;
@@ -73,7 +73,7 @@ export let setTime = (de, time) => {
 export let input = () => {
   const form = document.forms["userInput"];
 
-  if (form["_date"].value) {
+  if (form["_date"].value && form["_time"].value) {
     console.log(new Date(form["_date"].value).getTime(), new Date().getTime());
     if (new Date(form["_date"].value).getTime() > new Date().getTime()) {
       let item = {};
@@ -82,7 +82,11 @@ export let input = () => {
       }
       pushData(item);
     } else {
-      console.log("enter correct date");
+      let status = document.querySelector("#status");
+      status.innerHTML = "Enter Correct Date You Idiot!! 😤";
+      setTimeout(()=>{
+        status.innerHTML = "";
+      },3000)
     }
   }
 };
@@ -107,26 +111,26 @@ export let hideLogin = () => {
 export let clock = () => {
   setInterval(() => {
     document.getElementById("clock").innerText = new Date().toLocaleString();
-  }, 0);
+  }, 1000);
 };
 
 export let add = (item) => {
   document.getElementById("items").innerHTML += htmlElement;
-
+  let subject = document.querySelectorAll("#topic")[item.index];
+  let date = document.querySelectorAll("#text")[item.index];
+  let time = document.querySelectorAll("#timeLeft")[item.index]; 
   let d = new Date(item._date);
   d.setTime(setTime(d, item._time));
 
-  document.querySelectorAll("#topic")[item.index].innerHTML = item._name;
-  document.querySelectorAll("#text")[item.index].innerHTML = localTime(
-    item._date,
-    item._time
-  );
+  subject.innerHTML = item._name;
+  date.innerHTML = localTime(item._date, item._time);
+  time.innerHTML = "Loading ...";
 
   setInterval(() => {
     document.querySelectorAll("#timeLeft")[item.index].innerHTML = msToTime(
       d.getTime() - new Date().getTime()
     );
-  }, 0);
+  }, 1000);
 };
 
 export let dadd = (item, index) => {

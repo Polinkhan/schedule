@@ -2,9 +2,8 @@ import { clock, add, login, eve, setTime } from "./functions.js";
 import {pullData} from "./DB.js"
 
 eve();
-clock();
-
 let data = await pullData();
+clock();
 
 let sortData = [];
 if (data.length == 0) {
