@@ -1,10 +1,10 @@
 import { pushData } from "./DB.js";
 
 let hrs, min, ms;
-let htmlElement = `<div class="row my-4 text-center"><div id="topic" class="my-auto textfield col-4 label1"></div><div id="text" class="textfield col-4 label2 "></div><div id="timeLeft" class="textfield col-4 label3"></div></div>`;
+let htmlElement = `<div class="row my-4 text-center"><div id="topic" class="my-auto textfield col-4 label1"></div><div id="text" class="textfield col-4 label2 "></div><div id="timeLeft" class="textfield col-4 label3 fw-bold"></div></div>`;
 
 let build = (index) => {
-  return `<div class="row my-0 text-center"><div class="col-2" ></div><div id="name" class="my-auto textfield col-6 label4 rounded bg-primary text-white fw-bold"></div ><div class = "col-3 p-0"><button type ="submit" value = "${index}" class="btn text-white fw-bold bg-danger del">Delete</button></div><hr>`;
+  return `<div class="row my-3 text-center del-items"><div class="col-1" ></div><div id="name" class="my-auto textfield col-7 label4 rounded bg-primary text-white fw-bold"></div ><div class = "col-4 p-0"><button type ="submit" value = "${index}" class="btn text-white fw-bold bg-danger del"><i class="fa-solid fa-trash-can"></i></button></div>`;
 };
 
 let msToTime = (s) => {
@@ -16,7 +16,10 @@ let msToTime = (s) => {
   s = (s - mins) / 60;
   let hrs = s % 24;
   let days = (s - hrs) / 24;
-  return `${days}D ${hrs}H ${mins}M ${secs + 1}S left`;
+
+  let day = (days>1)? "days" : "day";
+
+  return `${days} ${day}<br/> ${hrs}h: ${mins}m: ${secs + 1}s`;
 };
 
 let getDate = (date) => {
@@ -55,7 +58,7 @@ let toHrsMin = (time, start, end) => {
 let localTime = (date, time) => {
   let ampm;
   toHrsMin(time, 0, 2) > 12 ? (ampm = "PM") : (ampm = "AM");
-  return `[ .. ${getDate(date)} .. ] ${toHrsMin(time, 0, 2) % 12}:${toHrsMin(
+  return `[ ${getDate(date)} ] <br/> at ${toHrsMin(time, 0, 2) % 12}:${toHrsMin(
     time,
     3,
     5
@@ -97,17 +100,6 @@ export let eve = () => {
   });
 };
 
-export let login = () => {
-  document.querySelector(".login").classList.add("hide");
-  document.querySelector(".loginInput").classList.remove("hide");
-  document.querySelector(".keybtn").classList.remove("hide");
-};
-
-export let hideLogin = () => {
-  document.querySelector(".loginInput").classList.add("hide");
-  document.querySelector(".keybtn").classList.add("hide");
-};
-
 export let clock = () => {
   setInterval(() => {
     document.getElementById("clock").innerText = new Date().toLocaleString();
@@ -137,12 +129,5 @@ export let dadd = (item, index) => {
   console.log(item);
   document.getElementById("deleteItems").innerHTML += build(index);
   document.querySelectorAll("#name")[index].innerHTML =
-    item._name + " [" + item._date.substring(5, 10) + "]";
+    item._name + "<br/> [" + item._date.substring(5, 10) + "]";
 };
-
-// export let getData = async () => {
-//   let data = [];
-//   let x = await pullData();
-//   x.forEach((elem) => data.push({ ...elem.data(), id: elem.id }));
-//   return data;
-// };

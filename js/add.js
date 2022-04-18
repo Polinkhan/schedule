@@ -4,6 +4,9 @@ import { deleteData,pullData} from "./DB.js";
 
 eve();
 document.querySelector(".submit").addEventListener("click", input);
+document.querySelector(".back").addEventListener("click", ()=>{
+  location.href = "./index.html";
+});
 
   let data = await pullData();
   data.forEach(function (elem, i) {

@@ -46,7 +46,12 @@ export let pushData = (item) => {
 export let deleteData = (point, id) => {
   const docRef = doc(db, "schedules", id);
   deleteDoc(docRef).then(() => {
-    point.parentNode.classList.remove("row");
-    point.parentNode.innerHTML = "delete done";
+    let div = point.parentNode.parentNode;
+    div.classList.remove("row");
+    div.innerHTML = "delete done";
+    setTimeout(()=>{
+      div.innerHTML = "";
+      div.classList.remove("del-items");
+    },1000)
   });
 };
