@@ -69,11 +69,15 @@ body{
 }
 
 .textfield{
-  min-height: 60px;
+  min-height: 40px;
+  font-size: .8rem;
   display: flex;
   place-content: center;
   place-items: center;
   
+}
+.del{
+  min-height: 40px;
 }
 
 .label1{
@@ -87,6 +91,9 @@ body{
 .label3{
   border-top-right-radius: .5rem;
   border-bottom-right-radius: .5rem;
+  background-color: #dddddd;
+}
+.label4{
   background-color: #dddddd;
 }
 

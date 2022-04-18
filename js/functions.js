@@ -4,7 +4,7 @@ let hrs, min, ms;
 let htmlElement = `<div class="row my-4 text-center"><div id="topic" class="my-auto textfield col-4 label1"></div><div id="text" class="textfield col-4 label2 "></div><div id="timeLeft" class="textfield col-4 label3"></div></div>`;
 
 let build = (index) => {
-  return `<div class="row my-4 text-center"><div class="col-1" ></div><div id="name" class="my-auto textfield col-6 label1"></div><button type ="submit" value = "${index}" class=" btn text-danger fw-bold textfield col-4 label3 bg-label del">Delete</button>`;
+  return `<div class="row my-0 text-center"><div class="col-2" ></div><div id="name" class="my-auto textfield col-6 label4 rounded bg-primary text-white fw-bold"></div ><div class = "col-3 p-0"><button type ="submit" value = "${index}" class="btn text-white fw-bold bg-danger del">Delete</button></div><hr>`;
 };
 
 let msToTime = (s) => {
