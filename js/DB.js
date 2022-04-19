@@ -57,7 +57,7 @@ export let deleteData = (point, id,name) => {
     let div = point.parentNode.parentNode;
     div.classList.remove("row");
     div.innerHTML = "delete done";
-    updateLog(userName + " deleted a schedule ["+name+"] "+new Date().toLocaleString()+" <br/>");
+    updateLog("<hr/>" + userName + " deleted a schedule ["+name+"] "+new Date().toLocaleString());
     setTimeout(() => {
       div.innerHTML = "";
       div.classList.remove("del-items");

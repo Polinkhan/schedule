@@ -83,7 +83,7 @@ export let input = () => {
       for (let i = 0; i < form.length - 1; i++) {
         item[form[i].name] = form[i].value;
       }
-      updateLog(userName + " added a schedule [" +form["_name"].value+"] "+new Date().toLocaleString()+" <br/>");
+      updateLog(" <hr/>" + userName + " added a schedule [" +form["_name"].value+"] "+new Date().toLocaleString());
       pushData(item);
     } else {
       let status = document.querySelector("#status");
