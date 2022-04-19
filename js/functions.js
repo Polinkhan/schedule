@@ -138,6 +138,9 @@ export let setCookie = (cname, cvalue, exdays) => {
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
   let expires = "expires=" + d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  if(cvalue != ""){
+    updateLog(" <hr/> a new user registered [" + cvalue +"]");
+  }
 };
 
 export let getCookie = (cname) => {
