@@ -1,13 +1,17 @@
 import { clock, add, eve, setTime,userName } from "./functions.js";
 import { pullData, pullLog } from "./DB.js";
 eve();
+
+window.onload = () =>{
+  document.querySelector(".welcome").classList.add("apear");
+}
+
 document.querySelector(".userName").innerText = userName; 
 // updateLog(`${userName} visit the page`);
 let log = await pullLog();
 let data = await pullData();
 document.querySelector(".logString").innerHTML = log;
 clock();
-
 
 let sortData = [];
 if (data.length == 0) {
@@ -37,4 +41,11 @@ sortData.forEach(function (elem, i) {
 
 document.querySelector(".login").addEventListener("click", () => {
   location.href = "./add.html";
+});
+document.querySelector(".log-txt").addEventListener("click", () => {
+  document.querySelector(".logString").classList.toggle("hide");
+  document.querySelector(".fa-angles-up").classList.toggle("rotate");
+  document.querySelector(".fa-angles-up").classList.toggle("text-primary");
+  document.querySelector(".fa-eye-slash").classList.toggle("d-none");
+  document.querySelector(".fa-eye").classList.toggle("d-none");
 });
