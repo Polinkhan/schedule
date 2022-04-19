@@ -1,4 +1,4 @@
-import { add } from "./functions.js";
+import { userName } from "./functions.js";
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
 import {
   getFirestore,
@@ -8,6 +8,7 @@ import {
   onSnapshot,
   deleteDoc,
   doc,
+  updateDoc
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -23,7 +24,14 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
+const logdb = getFirestore();
 const colRef = collection(db, "schedules");
+const logRef = collection(logdb, "log");
+
+export let pullLog = async () =>{
+  let y = await getDocs(logRef);
+  return y.docs[0].data().logString;
+}
 
 export let pullData = async () => {
   let x = await getDocs(colRef);
@@ -43,15 +51,25 @@ export let pushData = (item) => {
   });
 };
 
-export let deleteData = (point, id) => {
+export let deleteData = (point, id,name) => {
   const docRef = doc(db, "schedules", id);
   deleteDoc(docRef).then(() => {
     let div = point.parentNode.parentNode;
     div.classList.remove("row");
     div.innerHTML = "delete done";
-    setTimeout(()=>{
+    updateLog(userName + " deleted a schedule ["+name+"] "+new Date().toLocaleString()+" <br/>");
+    setTimeout(() => {
       div.innerHTML = "";
       div.classList.remove("del-items");
-    },1000)
+    }, 1000);
   });
+};
+
+export let updateLog = async(str) => {
+  let y = await getDocs(logRef);
+  const docRef = doc(logdb, "log", y.docs[0].id);
+  const prev = y.docs[0].data().logString;
+  updateDoc(docRef,{
+    logString : str + prev
+  })
 };

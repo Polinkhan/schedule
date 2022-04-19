@@ -1,9 +1,13 @@
-import { clock, add, eve, setTime } from "./functions.js";
-import {pullData} from "./DB.js"
-
+import { clock, add, eve, setTime,userName } from "./functions.js";
+import { pullData, pullLog } from "./DB.js";
 eve();
+document.querySelector(".userName").innerText = userName; 
+// updateLog(`${userName} visit the page`);
+let log = await pullLog();
 let data = await pullData();
+document.querySelector(".logString").innerHTML = log;
 clock();
+
 
 let sortData = [];
 if (data.length == 0) {
@@ -31,6 +35,6 @@ sortData.forEach(function (elem, i) {
   add(elem);
 });
 
-document.querySelector(".login").addEventListener("click", ()=>{
+document.querySelector(".login").addEventListener("click", () => {
   location.href = "./add.html";
 });

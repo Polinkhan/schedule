@@ -1,5 +1,5 @@
-import { pushData } from "./DB.js";
-
+import { pushData, updateLog } from "./DB.js";
+export let userName;
 let hrs, min, ms;
 let htmlElement = `<div class="row my-4 text-center"><div id="topic" class="my-auto textfield col-4 label1"></div><div id="text" class="textfield col-4 label2 "></div><div id="timeLeft" class="textfield col-4 label3 fw-bold"></div></div>`;
 
@@ -17,7 +17,7 @@ let msToTime = (s) => {
   let hrs = s % 24;
   let days = (s - hrs) / 24;
 
-  let day = (days>1)? "days" : "day";
+  let day = days > 1 ? "days" : "day";
 
   return `${days} ${day}<br/> ${hrs}h: ${mins}m: ${secs + 1}s`;
 };
@@ -83,13 +83,14 @@ export let input = () => {
       for (let i = 0; i < form.length - 1; i++) {
         item[form[i].name] = form[i].value;
       }
+      updateLog(userName + " added a schedule [" +form["_name"].value+"] "+new Date().toLocaleString()+" <br/>");
       pushData(item);
     } else {
       let status = document.querySelector("#status");
       status.innerHTML = "Enter Correct Date You Idiot!! 😤";
-      setTimeout(()=>{
+      setTimeout(() => {
         status.innerHTML = "";
-      },3000)
+      }, 3000);
     }
   }
 };
@@ -110,7 +111,7 @@ export let add = (item) => {
   document.getElementById("items").innerHTML += htmlElement;
   let subject = document.querySelectorAll("#topic")[item.index];
   let date = document.querySelectorAll("#text")[item.index];
-  let time = document.querySelectorAll("#timeLeft")[item.index]; 
+  let time = document.querySelectorAll("#timeLeft")[item.index];
   let d = new Date(item._date);
   d.setTime(setTime(d, item._time));
 
@@ -131,3 +132,33 @@ export let dadd = (item, index) => {
   document.querySelectorAll("#name")[index].innerHTML =
     item._name + "<br/> [" + item._date.substring(5, 10) + "]";
 };
+
+export let setCookie = (cname, cvalue, exdays) => {
+  const d = new Date();
+  d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
+  let expires = "expires=" + d.toUTCString();
+  document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+};
+
+export let getCookie = (cname) => {
+  let name = cname + "=";
+  let ca = document.cookie.split(";");
+  for (let i = 0; i < ca.length; i++) {
+    let c = ca[i];
+    while (c.charAt(0) == " ") {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+};
+
+userName = getCookie("username");
+if (userName == "") {
+  userName = prompt("Please enter your name:", "");
+  if (userName != "" && userName != null) {
+    setCookie("username", userName, 365);
+  }
+}

@@ -123,6 +123,9 @@ body{
   padding: 10px 0px;
   width: 80%;
 }
+.logString{
+  font-size: 0.8rem;
+}
 
 @keyframes spin {
   0% {
