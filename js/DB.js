@@ -8,7 +8,7 @@ import {
   onSnapshot,
   deleteDoc,
   doc,
-  updateDoc
+  updateDoc,
 } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -28,14 +28,14 @@ const logdb = getFirestore();
 const colRef = collection(db, "schedules");
 const logRef = collection(logdb, "log");
 
-export let pullLog = async () =>{
+export let pullLog = async () => {
   let y = await getDocs(logRef);
   return y.docs[0].data().logString;
-}
+};
 
 export let pullData = async () => {
   let x = await getDocs(colRef);
-  if(x.empty) return false;
+  if (x.empty) return false;
   let data = [];
   x.forEach((elem) => data.push({ ...elem.data(), id: elem.id }));
   return data;
@@ -52,13 +52,20 @@ export let pushData = (item) => {
   });
 };
 
-export let deleteData = (point, id,name) => {
+export let deleteData = (point, id, name) => {
   const docRef = doc(db, "schedules", id);
   deleteDoc(docRef).then(() => {
     let div = point.parentNode.parentNode;
     div.classList.remove("row");
     div.innerHTML = "delete done";
-    updateLog("<hr/>" + userName + " deleted a schedule ["+name+"] "+new Date().toLocaleString());
+    updateLog(
+      "<hr/>" +
+        userName +
+        " deleted a schedule [" +
+        name +
+        "] " +
+        new Date().toLocaleString()
+    );
     setTimeout(() => {
       div.innerHTML = "";
       div.classList.remove("del-items");
@@ -66,11 +73,26 @@ export let deleteData = (point, id,name) => {
   });
 };
 
-export let updateLog = async(str) => {
+export let updateData = async (item, id, index) => {
+  // console.log(document.forms[index]["_name"].value);
+  let y = await getDocs(logRef);
+  const docRef = doc(db, "schedules", id);
+  updateDoc(docRef, {
+    _name: item._name,
+    _date: item._date,
+    _time: item._time,
+  }).then(
+    updateLog(" <hr/>" +userName +" updated a schedule ["+ item._name +"] " + new Date().toLocaleString()),
+    document.forms[2].innerHTML = `<div class="text-center py-3 text-primary ">Update Done</div>`,
+    setTimeout(()=>{location.href = "./add.html"},1500),
+    );
+};
+
+export let updateLog = async (str) => {
   let y = await getDocs(logRef);
   const docRef = doc(logdb, "log", y.docs[0].id);
   const prev = y.docs[0].data().logString;
-  updateDoc(docRef,{
-    logString : str + prev
-  })
+  updateDoc(docRef, {
+    logString: str + prev,
+  });
 };

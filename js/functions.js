@@ -3,8 +3,10 @@ export let userName;
 let hrs, min, ms;
 let htmlElement = `<div class="row my-4 text-center"><div id="topic" class="my-auto textfield col-4 label1"></div><div id="text" class="textfield col-4 label2 "></div><div id="timeLeft" class="textfield col-4 label3 fw-bold"></div></div>`;
 
-let build = (index) => {
-  return `<div class="row my-3 text-center del-items"><div class="col-1" ></div><div id="name" class="my-auto textfield col-7 label4 rounded bg-primary text-white fw-bold"></div ><div class = "col-4 p-0"><button type ="submit" value = "${index}" class="btn text-white fw-bold bg-danger del"><i class="fa-solid fa-trash-can"></i></button></div>`;
+let build = (item,index) => {
+  return `<div class="row my-3 text-center del-items justify-content-center position-relative"><div id="name" class="my-auto textfield col-5 label4 rounded bg-primary text-white fw-bold"></div><div class="col-3 p-0"><button type="submit"value="${index}"class="btn text-white fw-bold bg-danger update"><i class="fa-solid fa-pen-to-square"></i></button></div><div class="col-2 p-0"><button type="submit"value="${index}"class="btn text-white fw-bold bg-danger del"><i class="fa-solid fa-trash-can"></i></button></div>
+  
+  <div class="update_form my-2"><form action="" value="${index}" class="row border border-dark rounded" name="update_form"><div class="p-0 col-3 my-auto"><select class="update_field name bg-white" name="_name"><option value="${item._name}">${item._name}</option><option value="VIP">VIP</option><option value="VIP LAB">VIP LAB</option><option value="DBMS">DBMS</option><option value="DBMS LAB">DBMS LAB</option><option value="ALGORITHM">ALGORITHM</option><option value="ALGORITHM LAB">ALGORITHM LAB</option><option value="MACHINE LEARNING">MACHINE LEARNING</option><option value="ISM">ISM</option><option value="OTHER">OTHER</option></select></div><div class="p-0 col-4 my-3"><input class="update_field bg-white" type="date" name="_date" value="${item._date}" required/></div><div class="p-0 col-3 my-auto"><input class="update_field bg-white"type="time"name="_time"value="${item._time}"required/></div><button value="${index}" class="col-2 p-0 my-auto border-0 bg-main"><i class="border rounded-circle my-auto fa-solid fa-circle-check update_submit"></i></button></form></div></div>`;
 };
 
 let msToTime = (s) => {
@@ -83,7 +85,14 @@ export let input = () => {
       for (let i = 0; i < form.length - 1; i++) {
         item[form[i].name] = form[i].value;
       }
-      updateLog(" <hr/>" + userName + " added a schedule [" +form["_name"].value+"] "+new Date().toLocaleString());
+      updateLog(
+        " <hr/>" +
+          userName +
+          " added a schedule [" +
+          form["_name"].value +
+          "] " +
+          new Date().toLocaleString()
+      );
       pushData(item);
     } else {
       let status = document.querySelector("#status");
@@ -127,15 +136,14 @@ export let add = (item) => {
 };
 
 export let dadd = (item, index) => {
-  console.log(item);
-  document.getElementById("deleteItems").innerHTML += build(index);
+  document.getElementById("deleteItems").innerHTML += build(item,index);
   document.querySelectorAll("#name")[index].innerHTML =
     item._name + "<br/> [" + item._date.substring(5, 10) + "]";
 };
 
 export let setCookie = (cname, cvalue, exdays) => {
-  if(cvalue != ""){
-    updateLog(" <hr/> a new user registered [" + cvalue +"]");
+  if (cvalue != "") {
+    updateLog(" <hr/> a new user registered [" + cvalue + "]");
   }
   const d = new Date();
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);

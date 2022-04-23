@@ -9,7 +9,7 @@ window.onload = () =>{
 document.querySelector(".userName").innerText = userName; 
 let log = await pullLog();
 let data = await pullData();
-document.querySelector(".logString").innerHTML = log;
+document.querySelector(".logString").innerHTML += log;
 clock();
 console.log(data)
 let sortData = [];
@@ -42,9 +42,6 @@ document.querySelector(".login").addEventListener("click", () => {
   location.href = "./add.html";
 });
 document.querySelector(".log-txt").addEventListener("click", () => {
-  document.querySelector(".logString").classList.toggle("hide");
-  document.querySelector(".fa-angles-up").classList.toggle("rotate");
-  document.querySelector(".fa-angles-up").classList.toggle("text-primary");
-  document.querySelector(".fa-eye-slash").classList.toggle("d-none");
-  document.querySelector(".fa-eye").classList.toggle("d-none");
+  document.querySelector(".logString").classList.toggle("txt_shift");
+  document.querySelector(".fa-angles-down").classList.toggle("rotate");
 });

@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   font-family: "Nunito", sans-serif;
-  text-transform:capitalize;
+  text-transform: capitalize;
   scroll-behavior: smooth;
 }
 
@@ -12,10 +12,11 @@
   --height: 50px;
 }
 
-body{
+body {
+  position: relative;
   background-color: aliceblue;
 }
-.clock-box{
+.clock-box {
   height: 100px;
   display: flex;
   place-items: center;
@@ -41,30 +42,31 @@ body{
   height: var(--height);
   animation: spin 5s linear infinite;
 }
-.navb{
+.navb {
   margin-top: 60px;
 }
 
-.nav-item h1{
-  text-transform:uppercase;
+.nav-item h1 {
+  text-transform: uppercase;
 }
 
-.container{
+.container {
   box-sizing: border-box;
 }
 
-.labelfield,.inputfield{
+.labelfield,
+.inputfield {
   font-size: 1.2rem;
 }
 
-.labelfield{
-  text-transform:uppercase;
+.labelfield {
+  text-transform: uppercase;
   min-width: 100px;
   text-align: center;
 }
 
-.inputfield{
-  text-transform:uppercase;
+.inputfield {
+  text-transform: uppercase;
   border: 1px solid black;
   border-radius: 1rem;
   outline: none;
@@ -73,96 +75,137 @@ body{
   text-align: center;
 }
 
-.btn{
+.update_field {
+  text-transform: uppercase;
+  border: 1px solid black;
+  border-radius: 1rem;
+  outline: none;
+  height: 35px;
+  width: 90%;
+  text-align: center;
+  font-size: 0.7rem;
+}
+
+.btn {
   color: white;
 }
 
-.textfield{
-  text-transform:uppercase;
+.textfield {
+  text-transform: uppercase;
   min-height: 50px;
-  font-size: .8rem;
+  font-size: 0.8rem;
   display: flex;
   place-content: center;
   place-items: center;
-  
 }
-.del{
+.del,
+.update {
   height: 50px;
   width: 50px;
-  border-radius: 5rem;
+  border-radius: 50%;
 }
 
-.label1{
-  border-top-left-radius: .5rem;
-  border-bottom-left-radius: .5rem;
+.label1 {
+  border-top-left-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
   background-color: #dddddd;
 }
-.label2{
-  background-color:#e3e3e3;
+.label2 {
+  background-color: #e3e3e3;
 }
-.label3{
-  border-top-right-radius: .5rem;
-  border-bottom-right-radius: .5rem;
+.label3 {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
   background-color: #dddddd;
 }
-.label4{
+.label4 {
   background-color: #dddddd;
 }
 
-.bg-label{
-  background-color:#e3e3e3;
+.bg-label {
+  background-color: #e3e3e3;
 }
 
-#sub{
+#sub {
   margin-left: 7rem;
 }
 
-.show{
+.show {
   display: block;
 }
 
-.hide{
-  display: none;
+.update_form{
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: .3s;
 }
-.loginInput{
+
+.hide {
+  height: 60px;
+  visibility: visible;
+  opacity: 1;
+  transition: .3s;
+}
+
+.update_submit{
+  font-size: 2.5rem;
+  color: rgb(41, 100, 255);
+  cursor: pointer;
+}
+.update_submit:hover{
+  color: dodgerblue;
+}
+
+.loginInput {
   width: 100px;
 }
-.del-items{
+.del-items {
   margin: 0 auto;
   border-bottom: 2px solid black;
-  padding: 10px 0px;
-  width: 80%;
+  padding-bottom:10px ;
+}
+.log-txt i{
+  font-size: 25px;
+  transition: 0.5s;
 }
 
-.log-txt{
-  border-bottom: 2px solid black;
-  cursor: pointer;
-  width: 100px;
-  opacity: 0.9;
-}
 
-.logString{
-  background-color:white;
+.logString {
+  position: fixed;
+  bottom:-43vh;
+  left: 5%;
+  background-color: lightblue;
   overflow: scroll;
-  padding: 5px;
+  padding: 20px;
   border: 2px solid gray;
   font-size: 0.8rem;
-  height: 300px;
-  opacity: 0.8;
+  height: 50vh;
+  width: 90%;
+  visibility: visible;
+  opacity: 0.9;
+  transition: 0.5s;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
-.fa-angles-up{
-  transition: .5s;
+.txt_shift{
+  bottom: 0;
+  transition: 0.5s;
+}
+.fa-angles-up {
+  transition: 0.5s;
 }
 
-.rotate{
+.rotate {
   transform: rotate(180deg);
-  transition: .5s;
+  transition: 0.5s;
   color: red;
 }
-.forSee,.forHide{
+.forSee,
+.forHide {
   min-width: 100px;
 }
-.welcome{
+.welcome {
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
   display: flex;
@@ -177,7 +220,7 @@ body{
   opacity: 0.9;
   transition: 1s;
 }
-.apear{
+.apear {
   top: 0px;
   transition: 1s;
 }
