@@ -35,6 +35,7 @@ export let pullLog = async () =>{
 
 export let pullData = async () => {
   let x = await getDocs(colRef);
+  if(x.empty) return false;
   let data = [];
   x.forEach((elem) => data.push({ ...elem.data(), id: elem.id }));
   return data;

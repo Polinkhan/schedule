@@ -7,12 +7,11 @@ window.onload = () =>{
 }
 
 document.querySelector(".userName").innerText = userName; 
-// updateLog(`${userName} visit the page`);
 let log = await pullLog();
 let data = await pullData();
 document.querySelector(".logString").innerHTML = log;
 clock();
-
+console.log(data)
 let sortData = [];
 if (data.length == 0) {
   document.querySelector(".error").classList.remove("hide");
