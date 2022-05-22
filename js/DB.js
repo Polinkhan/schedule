@@ -90,9 +90,9 @@ onAuthStateChanged(auth, (user) => {
     signupDiv.style.height = "0px";
   } else {
     // https://polinkhan.github.io/schedule/add.html
-    if (location.href == "http://127.0.0.1:5500/add.html") {
+    if (location.href == "https://polinkhan.github.io/schedule/add.html") {
       alert("Please login to access this page");
-      location.href = "http://127.0.0.1:5500/index.html";
+      location.href = "https://polinkhan.github.io/schedule/index.html";
     }
   }
 });
