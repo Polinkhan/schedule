@@ -1,5 +1,11 @@
-import { userName } from "./functions.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.10/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-app.js";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js";
 import {
   getFirestore,
   collection,
@@ -9,7 +15,7 @@ import {
   deleteDoc,
   doc,
   updateDoc,
-} from "https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBLAXBrRpNN3dLVpKNW86OOAp4zWVQa2bg",
@@ -20,7 +26,6 @@ const firebaseConfig = {
   appId: "1:518440926789:web:30e843eb69f9f615b66d2c",
   measurementId: "G-KD0LXCLH62",
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore();
@@ -28,6 +33,77 @@ const logdb = getFirestore();
 const colRef = collection(db, "schedules");
 const logRef = collection(logdb, "log");
 
+const auth = getAuth(app);
+
+export let SignUp = (email, password) => {
+  createUserWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      console.log("SignUp Complete");
+      const user = userCredential.user;
+      // ...
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+};
+
+export let Login = (email, password) => {
+  signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+      console.log(user);
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+    });
+};
+let userName = "";
+onAuthStateChanged(auth, (user) => {
+  if (user) {
+    console.log(location.href);
+    const uid = user.uid;
+    let i = 0;
+    while (user.email.charAt(i) != "@") {
+      userName += user.email.charAt(i);
+      i++;
+    }
+
+    let loginLogo = document.querySelector(".loginLogo");
+    let loginHead = document.querySelector(".loginHead");
+    let afterLogin = document.querySelector(".afterLogin");
+    let loginDiv = document.querySelector(".loginDiv");
+    let forgotDiv = document.querySelector(".forgotDiv");
+    let signupDiv = document.querySelector(".signupDiv");
+    let back = document.querySelector(".back");
+
+    loginLogo.innerHTML = "Manage";
+    loginHead.innerText = "Welcome " + userName;
+    afterLogin.classList.remove("hideLogin");
+    loginDiv.classList.add("hideLogin");
+    signupDiv.classList.add("hideLogin");
+    back.classList.add("hideLogin");
+    loginDiv.style.height = "0px";
+    forgotDiv.style.height = "0px";
+    signupDiv.style.height = "0px";
+  } else {
+    // https://polinkhan.github.io/schedule/add.html
+    if (location.href == "http://127.0.0.1:5500/add.html") {
+      alert("Please login to access this page");
+      location.href = "http://127.0.0.1:5500/index.html";
+    }
+  }
+});
+
+export let SIGNOUT = () => {
+  signOut(auth).then((location.href = "./index.html"));
+};
+
+export let getUserName = () => {
+  return userName;
+};
 export let pullLog = async () => {
   let y = await getDocs(logRef);
   return y.docs[0].data().logString;
@@ -41,11 +117,12 @@ export let pullData = async () => {
   return data;
 };
 
-export let pushData = (item) => {
+export let pushData = (item, name) => {
   let id = document.querySelector("#status");
   id.innerHTML = "Upload in progess!!";
   addDoc(colRef, item).then(() => {
     id.innerHTML = "Upload Complete!!";
+    updateLog(userName + " added a schedule [" + name + "] ");
     setTimeout(() => {
       id.innerHTML = "";
     }, 1000);
@@ -58,14 +135,7 @@ export let deleteData = (point, id, name) => {
     let div = point.parentNode.parentNode;
     div.classList.remove("row");
     div.innerHTML = "delete done";
-    updateLog(
-      "<hr/>" +
-        userName +
-        " deleted a schedule [" +
-        name +
-        "] " +
-        new Date().toLocaleString()
-    );
+    updateLog(userName + " deleted a schedule [" + name + "]");
     setTimeout(() => {
       div.innerHTML = "";
       div.classList.remove("del-items");
@@ -74,7 +144,6 @@ export let deleteData = (point, id, name) => {
 };
 
 export let updateData = async (item, id, index) => {
-  // console.log(document.forms[index]["_name"].value);
   let y = await getDocs(logRef);
   const docRef = doc(db, "schedules", id);
   updateDoc(docRef, {
@@ -82,13 +151,17 @@ export let updateData = async (item, id, index) => {
     _date: item._date,
     _time: item._time,
   }).then(
-    updateLog(" <hr/>" +userName +" updated a schedule ["+ item._name +"] " + new Date().toLocaleString()),
-    document.forms[2].innerHTML = `<div class="text-center py-3 text-primary ">Update Done</div>`,
-    setTimeout(()=>{location.href = "./add.html"},1500),
-    );
+    updateLog(userName + " updated a schedule [" + item._name + "]"),
+    (document.forms[
+      "updateForm"
+    ].innerHTML = `<div class="text-center py-3 text-primary ">Update Done</div>`),
+    setTimeout(() => {
+      location.href = "./add.html";
+    }, 1500)
+  );
 };
-
 export let updateLog = async (str) => {
+  str = " <hr/>[ " + new Date().toLocaleString() + " ] => " + str;
   let y = await getDocs(logRef);
   const docRef = doc(logdb, "log", y.docs[0].id);
   const prev = y.docs[0].data().logString;

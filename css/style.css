@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
   font-family: "Nunito", sans-serif;
-  text-transform: capitalize;
   scroll-behavior: smooth;
 }
 
@@ -15,6 +14,14 @@
 body {
   position: relative;
   background-color: aliceblue;
+}
+li{
+  margin: 15px 0px;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.forgetpass{
+  cursor: pointer;
 }
 .clock-box {
   height: 100px;
@@ -33,18 +40,19 @@ body {
   color: crimson;
 }
 
-.loader {
-  border: var(--thickness) solid #f3f3f3; /* Light grey */
+/* .loader {
+  border: var(--thickness) solid #f3f3f3;
   border-top: var(--thickness) solid royalblue;
   border-bottom: var(--thickness) solid royalblue;
   border-radius: 50%;
   width: var(--height);
   height: var(--height);
   animation: spin 5s linear infinite;
-}
+} */
 .navb {
   margin-top: 60px;
 }
+
 
 .nav-item h1 {
   text-transform: uppercase;
@@ -169,9 +177,30 @@ body {
   font-size: 25px;
   transition: 0.5s;
 }
-
-
 .logString {
+  height: 90vh;
+  font-size: 10px;
+  overflow-y: scroll;
+}
+.loginDiv,.forgotDiv,.signupDiv{
+  transition: .5s;
+}
+.hideLogin{
+  visibility: hidden;
+  opacity: 0;
+  transition: .5s;
+}
+.back{
+  padding: 5px 13px;
+}
+.back:hover{
+  cursor: pointer;
+  background-color: rgb(185, 185, 185);
+  margin: auto 0;
+  border-radius: 50%;
+}
+
+/* .logString {
   position: fixed;
   bottom:-43vh;
   left: 5%;
@@ -187,7 +216,7 @@ body {
   transition: 0.5s;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-}
+} */
 .txt_shift{
   bottom: 0;
   transition: 0.5s;
@@ -233,3 +262,8 @@ body {
     transform: rotate(360deg);
   }
 }
+
+@keyframes fadeOut {
+  0% {width: 100%;}
+  100% {width: 0%;} 
+} 

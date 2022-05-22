@@ -11,25 +11,175 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+      integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
     <title>Exam's Schedule</title>
   </head>
   <body>
-    <div class="text-center welcome bg-warning ">
-      <p class="m-0 p-0 fs-3 rounded fw-bold">Welcome, <span class="userName"></span></p>
+    <div class="text-center welcome bg-warning">
+      <p class="m-0 p-0 fs-3 rounded fw-bold">
+        Welcome, <span class="userName"></span>
+      </p>
     </div>
     <div class="container border border-dark rounded navb">
       <div class="container text-center">
         <nav class="row">
-          <div class="p-3 col-3 my-auto">
-            <div class="nav-item loader"></div>
-          </div>
-          <div class="p-3 my-auto nav-item col-6">
+          <div class="p-3 m-auto nav-item col-6">
             <h1 class="m-0 fs-4 fw-bold">exam schedule</h1>
           </div>
-          <div class="p-3 col-3 my-auto text-end">
-            <button class="btn bg-primary m-0 login"><i class="fa-solid fa-right-to-bracket"></i></button>
+          <div class="col-2 m-auto">
+            <a class="btn border-primary text-primary" href="./add.html"><i class="fa-solid fa-database"></i></a>
+          </div>
+          <div class="p-3 col-4 text-center m-auto">
+            <button
+              class="btn m-auto text-primary border border-primary login"
+              data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasTop"
+              aria-controls="offcanvasTop"
+            >
+            <div class="loginLogo ">
+              <i class="fs-3 fa-solid fa-user"></i>
+            </div>
+            </button>
+
+            <div
+              class="offcanvas offcanvas-top text-center"
+              tabindex="-1"
+              id="offcanvasTop"
+              aria-labelledby="offcanvasTopLabel"
+            >
+              <div class="offcanvas-header px-5 pb-0">
+                <!-- heading -->
+                <div class="back hideLogin align-middle">
+                  <i class="fa-solid fa-angle-left"></i>
+                </div>
+                <div class="heading">
+                  <h2 class="loginHead m-0">Login Form</h2>
+                </div>
+                <button
+                  type="button"
+                  class="btn-close text-reset"
+                  data-bs-dismiss="offcanvas"
+                  aria-label="Close"
+                ></button>
+              </div>
+
+              <div class="offcanvas-body px-5 overflow-visible">
+                <div class="loginDiv">
+                  <form class="row" action="" name="loginForm">
+                    <div class="col-12 col-md-8 col-lg-6 mx-auto">
+                      <div class="email mt-2">
+                        <input
+                          class="form-control text-lowercase"
+                          type="email"
+                          placeholder="example@_mail.com"
+                          name="email"
+                          required
+                        />
+                      </div>
+
+                      <div class="pass mt-2">
+                        <input
+                          class="form-control text-capitalized"
+                          type="password"
+                          placeholder="password"
+                          name="pass"
+                          required
+                        />
+                      </div>
+
+                      <div class="m-2 d-flex justify-content-between">
+                        <div>
+                          <input type="checkbox" name="check" /> remember me
+                        </div>
+                        <a
+                          class="text-danger p-0 forgetpass"
+                        >
+                          Forgot Password
+                      </a>
+                      </div>
+
+                      <div class="submitloginForm m-0">
+                        <input class="btn btn-primary LOGIN" type="submit" value="Login"/>
+                        <a class="btn btn-success goSignUp" >Sign Up</a>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="forgotDiv hideLogin">
+                  <form class="row" action="" name="forgotForm">
+                    <div class="col-12 col-md-8 col-lg-6 mx-auto">
+                      <div class="email mt-2">
+                        <input
+                          class="form-control text-lowercase"
+                          type="email"
+                          placeholder="example@_mail.com"
+                        />
+                      </div>
+
+                      <div class="submitloginForm mt-3">
+                        <input class="btn btn-primary" type="submit" value="Send"/>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="signupDiv hideLogin">
+                  <form class="row" action="" name="signUpForm">
+                    <div class="col-12 col-md-8 col-lg-6 mx-auto">
+                      <div class="email mt-2">
+                        <input
+                          class="form-control text-lowercase"
+                          type="email"
+                          placeholder="example@_mail.com"
+                          name="email"
+                          required
+                        />
+                      </div>
+
+                      <div class="pass mt-2">
+                        <input
+                          class="form-control text-capitalized"
+                          type="text"
+                          placeholder="password"
+                          name="pass"
+                          required
+                        />
+                      </div>
+
+                      <div class="pass mt-2">
+                        <input
+                          class="form-control text-capitalized"
+                          type="text"
+                          placeholder="confirm password"
+                          name="con-pass"
+                          required
+                        />
+                      </div>
+
+                      <div class="submitsignUpForm m-2">
+                        <input class="btn btn-success SIGNUP" type="submit" value="Sign Up"/>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="afterLogin text-start hideLogin">
+                  <ul>
+                    <li>Manage User Credential</li>
+                    <li class="btn bg-danger logout">Log Out</li>
+                  </ul>
+                </div>
+
+              </div>
+            </div>
           </div>
         </nav>
       </div>
@@ -48,11 +198,6 @@
         </div>
         <div id="items"></div>
       </div>
-
-    </div>
-
-    <div class="container log-txt">
-      <div class="logString"><i class="fa-solid fa-angles-down text-center w-100"></i></div>
     </div>
 
     <script

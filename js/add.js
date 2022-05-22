@@ -1,26 +1,29 @@
 import { input, eve, dadd } from "./functions.js";
-import { deleteData, pullData, updateData } from "./DB.js";
+import { deleteData, pullData, updateData, pullLog } from "./DB.js";
 
 eve();
+
 document.querySelector(".submit").addEventListener("click", input);
-document.querySelector(".back").addEventListener("click", () => {
+document.querySelector(".goBack").addEventListener("click", () => {
   location.href = "./index.html";
 });
 
+let log = await pullLog();
+document.querySelector(".logString").innerHTML = log;
+
 let data = await pullData();
-data.forEach(function (elem, i) {
-  dadd(elem, i);
-});
+if(data){
+  data.forEach(function (elem, i) {
+    dadd(elem, i);
+  });
+}
 
 $(document).ready(function () {
   $(".del").click(function () {
-    if (
-      confirm(
-        "are you sure you want to delete? This will also delete the data from the database "
-      )
-    ) {
+    document.querySelector(".delete").addEventListener("click",()=>{
       deleteData(this, data[this.value].id, data[this.value]._name);
-    }
+      console.log("hello")
+    })
   });
   $(".update").click(function () {
     let forms = $(".update_form");

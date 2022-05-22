@@ -1,17 +1,82 @@
-import { clock, add, eve, setTime,userName } from "./functions.js";
-import { pullData, pullLog } from "./DB.js";
+import { clock, add, eve, setTime } from "./functions.js";
+import { pullData,SignUp,Login,getUserName,SIGNOUT } from "./DB.js";
+window.onload = () => {
+  document.querySelector(".welcome").classList.add("apear");
+};
 eve();
 
-window.onload = () =>{
-  document.querySelector(".welcome").classList.add("apear");
+let data = await pullData();
+let userName = getUserName();
+
+let canvas = document.querySelector(".offcanvas-header");
+let loginHead = document.querySelector(".loginHead");
+let back = document.querySelector(".back");
+let loginDiv = document.querySelector(".loginDiv");
+let forgotDiv = document.querySelector(".forgotDiv")
+let signupDiv = document.querySelector(".signupDiv");
+
+function fadeCss() {
+  canvas.classList.toggle("hideLogin");
+  loginDiv.style.height = "0px";
+  back.classList.toggle("hideLogin");
+}
+function fadeCssOut() {
+  loginDiv.classList.toggle("hideLogin");
+  canvas.classList.toggle("hideLogin");
 }
 
-document.querySelector(".userName").innerText = userName; 
-let log = await pullLog();
-let data = await pullData();
-document.querySelector(".logString").innerHTML += log;
+document.querySelector(".forgetpass").addEventListener("click", () => {
+  fadeCssOut();
+  setTimeout(() => {
+    fadeCss();
+    forgotDiv.classList.toggle("hideLogin");
+    loginHead.innerText = "Reset Password";
+  }, 500);
+});
+
+document.querySelector(".goSignUp").addEventListener("click", () => {
+  fadeCssOut();
+  setTimeout(() => {
+    fadeCss();
+    forgotDiv.style.height = "0px";
+    signupDiv.classList.toggle("hideLogin");
+    loginHead.innerText = "Sign Up Now";
+  }, 500);
+});
+
+document.querySelector(".back").addEventListener("click", () => {
+  forgotDiv.classList.add("hideLogin");
+  signupDiv.classList.add("hideLogin");
+  canvas.classList.toggle("hideLogin");
+  back.classList.toggle("hideLogin");
+  setTimeout(() => {
+    fadeCssOut();
+    loginHead.innerText = "Login Now";
+  }, 500);
+});
+
+document.querySelector(".logout").addEventListener("click",()=>{
+  SIGNOUT();
+})
+
+document.querySelector(".LOGIN").addEventListener("click",()=>{
+  let email = document.forms["loginForm"]["email"].value;
+  let pass = document.forms["loginForm"]["pass"].value
+  if(email && pass){
+    Login(email,pass);
+  }
+})
+
+document.querySelector(".SIGNUP").addEventListener("click",()=>{
+  let email = document.forms["signUpForm"]["email"].value;
+  let pass = document.forms["signUpForm"]["pass"].value;
+  let conpass = document.forms["signUpForm"]["con-pass"].value;
+  if(pass == conpass){
+    SignUp(email,pass);
+  }
+})
+document.querySelector(".userName").innerText = userName;
 clock();
-console.log(data)
 let sortData = [];
 if (data.length == 0) {
   document.querySelector(".error").classList.remove("hide");
@@ -36,12 +101,4 @@ while (data.length > 0) {
 sortData.forEach(function (elem, i) {
   elem.index = i;
   add(elem);
-});
-
-document.querySelector(".login").addEventListener("click", () => {
-  location.href = "./add.html";
-});
-document.querySelector(".log-txt").addEventListener("click", () => {
-  document.querySelector(".logString").classList.toggle("txt_shift");
-  document.querySelector(".fa-angles-down").classList.toggle("rotate");
 });
