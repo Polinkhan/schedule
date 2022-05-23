@@ -107,7 +107,7 @@
         <div class="logString"></div>
       </div>
     </div>
-    <!-- Modal -->
+    <!-- Modal delete-->
 <div class="modal  fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -125,6 +125,27 @@
     </div>
   </div>
 </div>
+
+    <!-- Modal login-->
+
+    <button type="button" class="btn btn-primary invisible notLogIn" data-bs-toggle="modal" data-bs-target="#staticBackdrop2">
+    </button>
+
+    <div class="modal  fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="staticBackdropLabel">You are not logged in</h5>
+          </div>
+          <div class="modal-body">
+            <p>Please login with your account to access the data</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger modal-back" data-bs-dismiss="modal">Go, Back to Home Page</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"

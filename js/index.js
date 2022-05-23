@@ -1,12 +1,8 @@
 import { clock, add, eve, setTime } from "./functions.js";
-import { pullData,SignUp,Login,getUserName,SIGNOUT } from "./DB.js";
-window.onload = () => {
-  document.querySelector(".welcome").classList.add("apear");
-};
+import { pullData,SignUp,Login,SIGNOUT } from "./DB.js";
 eve();
 
 let data = await pullData();
-let userName = getUserName();
 
 let canvas = document.querySelector(".offcanvas-header");
 let loginHead = document.querySelector(".loginHead");
@@ -75,7 +71,6 @@ document.querySelector(".SIGNUP").addEventListener("click",()=>{
     SignUp(email,pass);
   }
 })
-document.querySelector(".userName").innerText = userName;
 clock();
 let sortData = [];
 if (data.length == 0) {

@@ -52,6 +52,7 @@ export let SignUp = (email, password) => {
 export let Login = (email, password) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
+      document.querySelector(".btn-close").click();
       const user = userCredential.user;
       console.log(user);
     })
@@ -70,6 +71,13 @@ onAuthStateChanged(auth, (user) => {
       userName += user.email.charAt(i);
       i++;
     }
+    document.querySelector(".userName").innerHTML = "Welcome " + userName;
+    setTimeout(()=>{
+      document.querySelector(".welcome").classList.toggle("apear");
+    },1000);
+    setTimeout(()=>{
+      document.querySelector(".welcome").classList.toggle("apear");
+    },4000);
 
     let loginLogo = document.querySelector(".loginLogo");
     let loginHead = document.querySelector(".loginHead");
@@ -79,7 +87,7 @@ onAuthStateChanged(auth, (user) => {
     let signupDiv = document.querySelector(".signupDiv");
     let back = document.querySelector(".back");
 
-    loginLogo.innerHTML = "Manage";
+    loginLogo.innerHTML = "<i class='fa-solid fa-p'></i>";
     loginHead.innerText = "Welcome " + userName;
     afterLogin.classList.remove("hideLogin");
     loginDiv.classList.add("hideLogin");
@@ -91,8 +99,10 @@ onAuthStateChanged(auth, (user) => {
   } else {
     // https://polinkhan.github.io/schedule/add.html
     if (location.href == "https://polinkhan.github.io/schedule/add.html") {
-      alert("Please login to access this page");
-      location.href = "https://polinkhan.github.io/schedule/index.html";
+      document.querySelector(".notLogIn").click();
+      document.querySelector(".modal-back").addEventListener("click",()=>{
+        location.href = "./index.html";
+      })
     }
   }
 });

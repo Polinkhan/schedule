@@ -182,6 +182,11 @@ li{
   font-size: 10px;
   overflow-y: scroll;
 }
+
+.offcanvas{
+  height: 40vh;
+}
+
 .loginDiv,.forgotDiv,.signupDiv{
   transition: .5s;
 }
