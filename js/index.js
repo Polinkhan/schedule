@@ -1,5 +1,5 @@
 import { clock, add, eve, setTime } from "./functions.js";
-import { pullData,SignUp,Login,SIGNOUT } from "./DB.js";
+import { pullData, SignUp, Login, SIGNOUT, resetPass } from "./DB.js";
 eve();
 
 let data = await pullData();
@@ -8,7 +8,7 @@ let canvas = document.querySelector(".offcanvas-header");
 let loginHead = document.querySelector(".loginHead");
 let back = document.querySelector(".back");
 let loginDiv = document.querySelector(".loginDiv");
-let forgotDiv = document.querySelector(".forgotDiv")
+let forgotDiv = document.querySelector(".forgotDiv");
 let signupDiv = document.querySelector(".signupDiv");
 let afterLogin = document.querySelector(".afterLogin");
 
@@ -52,26 +52,30 @@ document.querySelector(".back").addEventListener("click", () => {
   }, 500);
 });
 
-document.querySelector(".logout").addEventListener("click",()=>{
+document.querySelector(".logout").addEventListener("click", () => {
   SIGNOUT();
-})
+});
 
-document.querySelector(".LOGIN").addEventListener("click",()=>{
+document.querySelector(".LOGIN").addEventListener("click", () => {
   let email = document.forms["loginForm"]["email"].value;
-  let pass = document.forms["loginForm"]["pass"].value
-  if(email && pass){
-    Login(email,pass);
+  let pass = document.forms["loginForm"]["pass"].value;
+  if (email && pass) {
+    Login(email, pass);
   }
-})
+});
 
-document.querySelector(".SIGNUP").addEventListener("click",()=>{
+document.querySelector(".reset").addEventListener("click", () => {
+  resetPass(document.forms["forgotForm"]["email"].value);
+});
+
+document.querySelector(".SIGNUP").addEventListener("click", () => {
   let email = document.forms["signUpForm"]["email"].value;
   let pass = document.forms["signUpForm"]["pass"].value;
   let conpass = document.forms["signUpForm"]["con-pass"].value;
-  if(pass == conpass){
-    SignUp(email,pass);
+  if (pass == conpass) {
+    SignUp(email, pass);
   }
-})
+});
 clock();
 let sortData = [];
 if (data.length == 0) {

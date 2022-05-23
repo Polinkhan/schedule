@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
+  sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js";
 import {
   getFirestore,
@@ -71,13 +72,14 @@ onAuthStateChanged(auth, (user) => {
       userName += user.email.charAt(i);
       i++;
     }
+    
     document.querySelector(".userName").innerHTML = "Welcome " + userName;
-    setTimeout(()=>{
+    setTimeout(() => {
       document.querySelector(".welcome").classList.toggle("apear");
-    },1000);
-    setTimeout(()=>{
+    }, 1000);
+    setTimeout(() => {
       document.querySelector(".welcome").classList.toggle("apear");
-    },4000);
+    }, 4000);
 
     let loginLogo = document.querySelector(".loginLogo");
     let loginHead = document.querySelector(".loginHead");
@@ -96,16 +98,29 @@ onAuthStateChanged(auth, (user) => {
     loginDiv.style.height = "0px";
     forgotDiv.style.height = "0px";
     signupDiv.style.height = "0px";
+
   } else {
     // https://polinkhan.github.io/schedule/add.html
     if (location.href == "https://polinkhan.github.io/schedule/add.html") {
       document.querySelector(".notLogIn").click();
-      document.querySelector(".modal-back").addEventListener("click",()=>{
+      document.querySelector(".modal-back").addEventListener("click", () => {
         location.href = "./index.html";
-      })
+      });
     }
   }
 });
+export let resetPass = (email) => {
+  console.log(email);
+  sendPasswordResetEmail(auth, email)
+    .then(() => {
+      document.querySelector(".forgotDiv").innerHTML = "A reset link sent to your email address</br> ["+email+"]";
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      // ..
+    });
+};
 
 export let SIGNOUT = () => {
   signOut(auth).then((location.href = "./index.html"));
