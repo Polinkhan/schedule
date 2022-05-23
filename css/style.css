@@ -184,7 +184,7 @@ li{
 }
 
 .offcanvas{
-  height: 40vh;
+  min-height: 35vh;
 }
 
 .loginDiv,.forgotDiv,.signupDiv{

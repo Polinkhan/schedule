@@ -10,6 +10,7 @@ let back = document.querySelector(".back");
 let loginDiv = document.querySelector(".loginDiv");
 let forgotDiv = document.querySelector(".forgotDiv")
 let signupDiv = document.querySelector(".signupDiv");
+let afterLogin = document.querySelector(".afterLogin");
 
 function fadeCss() {
   canvas.classList.toggle("hideLogin");
