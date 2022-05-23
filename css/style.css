@@ -185,6 +185,7 @@ li{
 
 .offcanvas{
   min-height: 35vh;
+  overflow-y: scroll;
 }
 
 .loginDiv,.forgotDiv,.signupDiv{
