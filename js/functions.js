@@ -106,7 +106,7 @@ export let eve = () => {
 
 export let clock = () => {
   setInterval(() => {
-    document.getElementById("clock").innerText = new Date().toLocaleString();
+    document.getElementById("clock").innerHTML = new Date().toDateString()+" - "+new Date().toLocaleTimeString();
   }, 1000);
 };
 

@@ -13,29 +13,23 @@
 
 body {
   position: relative;
-  background-color: aliceblue;
+
 }
 li{
-  margin: 15px 0px;
   cursor: pointer;
-  text-decoration: underline;
+  text-decoration: none;
 }
-.forgetpass{
+.forgetpass,.goSignUp{
   cursor: pointer;
-}
-.clock-box {
-  height: 100px;
-  display: flex;
-  place-items: center;
-  place-content: center;
 }
 
-#clock {
-  background: -webkit-linear-gradient(cadetblue, lightcoral);
-  background-clip: border-box;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+footer{
+width: 100%;
+padding: 10px 0px;
+text-align: center;
+background-color: lightcoral;
 }
+
 #date {
   color: crimson;
 }
@@ -49,15 +43,6 @@ li{
   height: var(--height);
   animation: spin 5s linear infinite;
 } */
-.navb {
-  margin-top: 60px;
-}
-
-
-.nav-item h1 {
-  text-transform: uppercase;
-}
-
 .container {
   box-sizing: border-box;
 }
@@ -189,6 +174,9 @@ li{
 .offcanvas-body{
   overflow: visible;
 }
+.link{
+  font-size: 0.9rem;
+}
 
 .loginDiv,.forgotDiv,.signupDiv{
   transition: .5s;
@@ -242,7 +230,7 @@ li{
 .forHide {
   min-width: 100px;
 }
-.welcome {
+/* .welcome {
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
   display: flex;
@@ -260,7 +248,7 @@ li{
 .apear {
   top: 0px;
   transition: 1s;
-}
+} */
 
 @keyframes spin {
   0% {

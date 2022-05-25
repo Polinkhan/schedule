@@ -4,9 +4,6 @@ import { deleteData, pullData, updateData, pullLog } from "./DB.js";
 eve();
 
 document.querySelector(".submit").addEventListener("click", input);
-document.querySelector(".goBack").addEventListener("click", () => {
-  location.href = "./index.html";
-});
 
 let log = await pullLog();
 document.querySelector(".logString").innerHTML = log;

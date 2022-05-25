@@ -55,11 +55,10 @@ export let Login = (email, password) => {
     .then((userCredential) => {
       document.querySelector(".btn-close").click();
       const user = userCredential.user;
-      console.log(user);
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      let er = document.querySelector(".errorText");
+      er.innerHTML = error.code;
     });
 };
 let userName = "";
@@ -73,13 +72,13 @@ onAuthStateChanged(auth, (user) => {
       i++;
     }
     
-    document.querySelector(".userName").innerHTML = "Welcome " + userName;
-    setTimeout(() => {
-      document.querySelector(".welcome").classList.toggle("apear");
-    }, 1000);
-    setTimeout(() => {
-      document.querySelector(".welcome").classList.toggle("apear");
-    }, 4000);
+    // document.querySelector(".userName").innerHTML = "Welcome " + userName;
+    // setTimeout(() => {
+    //   document.querySelector(".welcome").classList.toggle("apear");
+    // }, 1000);
+    // setTimeout(() => {
+    //   document.querySelector(".welcome").classList.toggle("apear");
+    // }, 4000);
 
     let loginLogo = document.querySelector(".loginLogo");
     let loginHead = document.querySelector(".loginHead");
@@ -90,7 +89,7 @@ onAuthStateChanged(auth, (user) => {
     let back = document.querySelector(".back");
 
     loginLogo.innerHTML = "<i class='fa-solid fa-p'></i>";
-    loginHead.innerText = "Welcome " + userName;
+    // loginHead.innerText = "Welcome " + userName;
     afterLogin.classList.remove("hideLogin");
     loginDiv.classList.add("hideLogin");
     signupDiv.classList.add("hideLogin");

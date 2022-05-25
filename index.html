@@ -25,28 +25,37 @@
     <div class="text-center welcome bg-warning">
       <p class="m-0 p-0 fs-3 rounded fw-bold userName"></p>
     </div>
-    <div class="container border border-dark rounded navb">
-      <div class="container text-center">
-        <nav class="row">
-          <div class="p-3 m-auto nav-item col-8">
-            <h1 class="m-0 fs-4 fw-bold">exam schedule</h1>
-          </div>
-          <div class="col-2 m-auto">
-            <a
-              class="btn border-primary text-primary nav-icon"
+
+    <div class="container">
+      <ul class="nav nav-tabs my-3">
+        <li class="nav-item ">
+          <a class="nav-link active text-primary" aria-current="page" href="index.html"><i class="fa-solid fa-house"></i> Home </a>
+        </li>
+        <li class="nav-item">
+          <a
+              class="text-dark nav-icon nav-link"
               href="./add.html"
               ><i class="fa-solid fa-database"></i
-            ></a>
+            > Data </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="container">
+      <div class="container text-center">
+        <nav class="row border-bottom">
+          <div class="p-3 nav-item col-8">
+            <h1 class="m-0 fs-4 fw-bold">Exam Schedule</h1>
           </div>
-          <div class="p-3 col-2 text-center m-auto">
+          <div class="col-4 text-center m-auto">
             <button
-              class="btn m-auto text-primary border border-primary rounded login"
+              class="m-auto text-primary border-0 bg-white login"
               data-bs-toggle="offcanvas"
               data-bs-target="#offcanvasTop"
               aria-controls="offcanvasTop"
             >
               <div class="loginLogo my-auto">
-                <i class="fa-solid fa-user"></i>
+                Sign In
               </div>
             </button>
 
@@ -97,22 +106,44 @@
                       </div>
 
                       <div class="m-2 d-flex justify-content-between">
-                        <div>
-                          <input type="checkbox" name="check" /> remember me
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="flexCheckDefault"
+                          />
+                          <label
+                            class="form-check-label link"
+                            for="flexCheckDefault"
+                          >
+                            Remember me
+                          </label>
                         </div>
-                        <a class="text-danger p-0 forgetpass">
-                          Forgot Password
-                        </a>
                       </div>
 
-                      <div class="submitloginForm m-0">
+                      <div class="errorText fs-6 mb-2 text-danger"></div>
+
+                      <div class="submitloginForm">
                         <input
                           class="btn btn-primary LOGIN"
                           type="submit"
                           value="Login"
                         />
-                        <a class="btn btn-success goSignUp">Sign Up</a>
                       </div>
+                      <a class="link goSignUp text-dark text-decoration-none"
+                        >Don't have a account?
+                        <span class="text-decoration-underline text-danger"
+                          >sign up now</span
+                        ></a
+                      >
+                      <br />
+                      <a class="link text-dark text-decoration-none forgetpass">
+                        Can't sign in?
+                        <span class="text-decoration-underline text-danger"
+                          >forgot password</span
+                        >
+                      </a>
                     </div>
                   </form>
                 </div>
@@ -197,12 +228,6 @@
       </div>
 
       <div class="container">
-        <div class="clock-box border rounded border-dark">
-          <div id="clock" class="fs-2 fw-bold">Loading ...</div>
-        </div>
-      </div>
-
-      <div class="container">
         <div class="row my-4 text-center fw-bold">
           <div id="" class="textfield label1 col-4">subject</div>
           <div id="" class="textfield label2 col-4">date</div>
@@ -211,6 +236,10 @@
         <div id="items"></div>
       </div>
     </div>
+
+    <footer class="position-fixed bottom-0">
+          <div id="clock" class="fs-5 fw-bold">Loading ...</div>
+    </footer>
 
     <script
       src="https://code.jquery.com/jquery-3.6.0.min.js"
