@@ -1,5 +1,15 @@
 import { pushData, updateLog, getUserName} from "./DB.js";
-let userName = getUserName();
+
+function loading(){
+  document.querySelector('.loading-container').classList.add('fade-out');
+}
+
+function fadeOut(){
+  setTimeout(loading,1500);
+}
+
+window.onload = fadeOut;
+
 let hrs, min, ms;
 let htmlElement = `<div class="row my-4 text-center"><div id="topic" class="my-auto textfield col-4 label1"></div><div id="text" class="textfield col-4 label2 "></div><div id="timeLeft" class="textfield col-4 label3 fw-bold"></div></div>`;
 

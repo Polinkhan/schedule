@@ -5,7 +5,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
 } from "https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js";
 import {
   getFirestore,
@@ -44,8 +44,8 @@ export let SignUp = (email, password) => {
       // ...
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      let er = document.querySelector(".errorText2");
+      er.innerHTML = error.code;
       // ..
     });
 };
@@ -71,7 +71,7 @@ onAuthStateChanged(auth, (user) => {
       userName += user.email.charAt(i);
       i++;
     }
-    
+
     // document.querySelector(".userName").innerHTML = "Welcome " + userName;
     // setTimeout(() => {
     //   document.querySelector(".welcome").classList.toggle("apear");
@@ -88,16 +88,25 @@ onAuthStateChanged(auth, (user) => {
     let signupDiv = document.querySelector(".signupDiv");
     let back = document.querySelector(".back");
 
-    loginLogo.innerHTML = "<i class='fa-solid fa-p'></i>";
+    if (loginLogo) loginLogo.innerHTML = userName;
     // loginHead.innerText = "Welcome " + userName;
-    afterLogin.classList.remove("hideLogin");
-    loginDiv.classList.add("hideLogin");
-    signupDiv.classList.add("hideLogin");
-    back.classList.add("hideLogin");
-    loginDiv.style.height = "0px";
-    forgotDiv.style.height = "0px";
-    signupDiv.style.height = "0px";
-
+    if (afterLogin) {
+      afterLogin.classList.remove("hideLogin");
+    }
+    if (loginDiv) {
+      loginDiv.classList.add("hideLogin");
+      loginDiv.style.height = "0px";
+    }
+    if (signupDiv) {
+      signupDiv.classList.add("hideLogin");
+      signupDiv.style.height = "0px";
+    }
+    if (back) {
+      back.classList.add("hideLogin");
+    }
+    if(forgotDiv){
+      forgotDiv.style.height = "0px";
+    }
   } else {
     // https://polinkhan.github.io/schedule/add.html
     if (location.href == "https://polinkhan.github.io/schedule/add.html") {
@@ -112,11 +121,12 @@ export let resetPass = (email) => {
   console.log(email);
   sendPasswordResetEmail(auth, email)
     .then(() => {
-      document.querySelector(".forgotDiv").innerHTML = "A reset link sent to your email address</br> ["+email+"]";
+      document.querySelector(".forgotDiv").innerHTML =
+        "A reset link sent to your email address</br> [" + email + "]";
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
+      let er = document.querySelector(".errorText3");
+      er.innerHTML = error.code;
       // ..
     });
 };

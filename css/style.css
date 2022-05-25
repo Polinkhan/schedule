@@ -30,6 +30,16 @@ text-align: center;
 background-color: lightcoral;
 }
 
+#loading {
+  background: url('image/loading.gif');
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 9999999;
+}
+
 #date {
   color: crimson;
 }
@@ -153,6 +163,8 @@ background-color: lightcoral;
 .loginInput {
   width: 100px;
 }
+
+
 .del-items {
   margin: 0 auto;
   border-bottom: 2px solid black;
@@ -263,3 +275,20 @@ background-color: lightcoral;
   0% {width: 100%;}
   100% {width: 0%;} 
 } 
+
+.loading-container{
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 10000;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.loading-container.fade-out{
+  top: -120%;
+  transition: .5s;
+}
